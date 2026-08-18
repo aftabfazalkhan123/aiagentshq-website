@@ -143,6 +143,67 @@
 
   .hero{ overflow:hidden; }
   #hero-particles{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+
+  /* ---- Fit Assessment Quiz ---- */
+  #quiz-overlay{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(6,8,12,0.82);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    opacity:0; pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  #quiz-overlay.is-open{ opacity:1; pointer-events:auto; }
+  #quiz-card{
+    position:relative;
+    width:100%; max-width:560px;
+    max-height:88vh; overflow-y:auto;
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:40px 36px 32px;
+  }
+  #quiz-close{
+    position:absolute; top:16px; right:18px;
+    background:none; border:none; color:var(--muted);
+    font-size:26px; line-height:1; cursor:pointer;
+  }
+  #quiz-close:hover{ color:var(--ink); }
+  #quiz-progress{ height:3px; background:var(--line); border-radius:2px; margin-bottom:28px; overflow:hidden; }
+  #quiz-progress-bar{ height:100%; background:var(--gold); width:0%; transition:width .3s ease; }
+  .quiz-eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:10px;
+  }
+  .quiz-q{ font-family:var(--serif); font-size:24px; font-weight:600; margin-bottom:6px; line-height:1.3; }
+  .quiz-sub{ color:var(--muted); font-size:14px; margin-bottom:18px; }
+  .quiz-options{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+  .quiz-option{
+    text-align:left; background:var(--panel); border:1px solid var(--line);
+    color:var(--ink); padding:13px 16px; border-radius:6px; font-family:var(--sans);
+    font-size:15px; cursor:pointer; transition:all .15s ease;
+  }
+  .quiz-option:hover{ border-color:var(--gold-soft); }
+  .quiz-option.active{ border-color:var(--gold); background:rgba(201,162,39,0.10); color:var(--gold); }
+  .quiz-textarea, .quiz-input{
+    width:100%; background:var(--panel); border:1px solid var(--line);
+    color:var(--ink); padding:13px 16px; border-radius:6px; font-family:var(--sans);
+    font-size:15px; margin-top:16px; box-sizing:border-box;
+  }
+  .quiz-textarea{ min-height:80px; resize:vertical; }
+  .quiz-input + .quiz-input{ margin-top:12px; }
+  .quiz-nav{ display:flex; justify-content:space-between; align-items:center; margin-top:28px; }
+  .quiz-btn-primary{
+    background:var(--gold); color:var(--bg); border:none; padding:12px 22px;
+    border-radius:6px; font-family:var(--sans); font-weight:600; font-size:14px; cursor:pointer;
+  }
+  .quiz-btn-primary:hover{ background:#dab634; }
+  .quiz-btn-ghost{
+    background:none; border:1px solid var(--line); color:var(--muted);
+    padding:12px 20px; border-radius:6px; font-family:var(--sans); font-size:14px; cursor:pointer;
+  }
+  .quiz-btn-ghost:hover{ border-color:var(--gold-soft); color:var(--ink); }
+  .quiz-result-text{ color:var(--muted); font-size:15px; line-height:1.6; margin-top:10px; }
   .proof-tag{font-family:var(--mono); font-size:12px; letter-spacing:0.08em; color:var(--gold); text-transform:uppercase;}
   .proof-item h3{font-family:var(--serif); font-size:24px; font-weight:600; margin-top:8px;}
   .proof-item .desc{color:var(--muted); font-size:15px; margin-top:14px; max-width:560px;}
@@ -216,7 +277,7 @@
     <h1>We build AI agents that do the <em>busywork</em>,<br>so you don't have to hire for it.</h1>
     <p class="sub">Custom-built systems that read your inbox, qualify your leads, and keep your records updated — running quietly in the background of a real, working business.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#contact">Start a conversation</a>
+      <button class="btn btn-primary" onclick="openQuiz()">Find Out What's Actually Costing You Time →</button>
       <a class="btn btn-ghost" href="#work">See what we've built</a>
     </div>
   </div>
@@ -334,7 +395,8 @@
 <div class="cta-final reveal" id="contact">
   <div class="eyebrow" style="justify-content:center;">Get In Touch</div>
   <h2>Have a task that shouldn't need a person anymore?</h2>
-  <a class="btn btn-primary" href="mailto:hello@aiagentshq.xyz">hello@aiagentshq.xyz</a>
+  <button class="btn btn-primary" onclick="openQuiz()">Find Out What's Actually Costing You Time →</button>
+  <p style="margin-top:16px;"><a href="mailto:hello@aiagentshq.xyz" style="color:var(--muted); font-size:14px;">or email us directly at hello@aiagentshq.xyz</a></p>
 </div>
 
 <footer>
@@ -464,6 +526,237 @@
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   items.forEach(function (el) { observer.observe(el); });
+})();
+
+// ---- Fit Assessment Quiz ----
+(function () {
+  // IMPORTANT: replace this with your real n8n webhook URL once that workflow is built.
+  // Until then, submissions are still captured and shown in the console, and the
+  // result screen still works fine for visitors — you just won't receive them yet.
+  const WEBHOOK_URL = "https://REPLACE-WITH-YOUR-N8N-WEBHOOK-URL";
+
+  const state = { step: 0, answers: { painPoints: [] } };
+
+  const steps = [
+    {
+      key: 'businessType',
+      q: "What kind of business do you run?",
+      type: 'single',
+      options: [
+        "E-commerce Shop",
+        "Local Home Services (Plumbing, HVAC, Contracting)",
+        "Professional Services (Law, Accounting, Consulting)",
+        "Healthcare & Wellness (Clinic, Spa, Therapy Practice)",
+        "B2B Agency or Consultancy (Marketing, Recruiting, IT)",
+        "Something else"
+      ]
+    },
+    {
+      key: 'painPoints',
+      q: "Where does your week actually disappear?",
+      sub: "Pick as many as apply.",
+      type: 'multi',
+      options: [
+        "Researching and qualifying inbound leads before I even talk to them",
+        "Missing calls or messages when I'm busy",
+        "Back-and-forth emails just to lock in a meeting or appointment",
+        "Answering the same basic customer questions over and over",
+        "Manually logging calls, texts, or emails into a tracking sheet or CRM",
+        "Chasing renewals before they quietly lapse",
+        "Never getting around to asking for reviews",
+        "Chasing unpaid invoices"
+      ]
+    },
+    {
+      key: 'hoursPerWeek',
+      q: "If you had to guess, how many hours a week go into that stuff combined?",
+      type: 'single',
+      options: ["Under 2 hours", "2–5 hours", "5–10 hours", "More than 10 hours"]
+    },
+    {
+      key: 'responseTime',
+      q: "When someone contacts you who isn't already a customer, what usually happens?",
+      type: 'single',
+      options: [
+        "I usually respond within minutes",
+        "I usually respond the same day",
+        "It depends on who's available at the time",
+        "Messages can sit unanswered for a while"
+      ]
+    },
+    {
+      key: 'ideal',
+      q: "If that time came back, what would you actually do with it?",
+      type: 'text',
+      placeholder: "One line is plenty..."
+    },
+    {
+      key: 'budget',
+      q: "Roughly what would you expect to invest in something like this?",
+      type: 'single',
+      options: ["Under $500", "$500–$1,500", "$1,500–$3,000", "$3,000+", "Not sure yet, just exploring"]
+    },
+    {
+      key: 'contact',
+      q: "Want us to show you exactly what this could look like for your business?",
+      type: 'contact'
+    }
+  ];
+
+  function buildModal() {
+    const overlay = document.createElement('div');
+    overlay.id = 'quiz-overlay';
+    overlay.innerHTML = `
+      <div id="quiz-card">
+        <button id="quiz-close" aria-label="Close">&times;</button>
+        <div id="quiz-progress"><div id="quiz-progress-bar"></div></div>
+        <div id="quiz-body"></div>
+      </div>`;
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeQuiz(); });
+    document.getElementById('quiz-close').addEventListener('click', closeQuiz);
+    renderStep();
+  }
+
+  function renderStep() {
+    const body = document.getElementById('quiz-body');
+    const bar = document.getElementById('quiz-progress-bar');
+    if (!body) return;
+
+    if (state.step >= steps.length) { renderResult(); return; }
+
+    const s = steps[state.step];
+    bar.style.width = (((state.step) / steps.length) * 100) + '%';
+
+    let html = `<div class="quiz-eyebrow">Question ${state.step + 1} of ${steps.length}</div>
+      <h3 class="quiz-q">${s.q}</h3>`;
+    if (s.sub) html += `<p class="quiz-sub">${s.sub}</p>`;
+
+    if (s.type === 'single') {
+      html += '<div class="quiz-options">';
+      s.options.forEach(function (opt) {
+        const active = state.answers[s.key] === opt ? ' active' : '';
+        html += `<button class="quiz-option${active}" data-value="${opt}">${opt}</button>`;
+      });
+      html += '</div>';
+    } else if (s.type === 'multi') {
+      html += '<div class="quiz-options">';
+      s.options.forEach(function (opt) {
+        const active = (state.answers.painPoints || []).includes(opt) ? ' active' : '';
+        html += `<button class="quiz-option${active}" data-value="${opt}">${opt}</button>`;
+      });
+      html += '</div>';
+    } else if (s.type === 'text') {
+      html += `<textarea id="quiz-text-input" class="quiz-textarea" placeholder="${s.placeholder}">${state.answers[s.key] || ''}</textarea>`;
+    } else if (s.type === 'contact') {
+      html += `
+        <input id="quiz-name" class="quiz-input" type="text" placeholder="Your name" value="${state.answers.name || ''}">
+        <input id="quiz-email" class="quiz-input" type="email" placeholder="Your email" value="${state.answers.email || ''}">
+        <p class="quiz-sub" style="margin-top:20px; margin-bottom:0;">How soon are you looking to get moving on this?</p>
+        <div class="quiz-options" style="margin-top:10px;">
+          <button class="quiz-option${state.answers.urgency === 'Ready to move soon' ? ' active' : ''}" data-value="Ready to move soon" data-urgency="1">Ready to move soon</button>
+          <button class="quiz-option${state.answers.urgency === 'Just exploring for now' ? ' active' : ''}" data-value="Just exploring for now" data-urgency="1">Just exploring for now</button>
+        </div>`;
+    }
+
+    html += `<div class="quiz-nav">
+      ${state.step > 0 ? '<button id="quiz-back" class="quiz-btn-ghost">Back</button>' : '<span></span>'}
+      <button id="quiz-next" class="quiz-btn-primary">${state.step === steps.length - 1 ? 'See My Result' : 'Next'}</button>
+    </div>`;
+
+    body.innerHTML = html;
+    wireStepEvents(s);
+  }
+
+  function wireStepEvents(s) {
+    document.querySelectorAll('.quiz-option').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const val = btn.getAttribute('data-value');
+        if (btn.hasAttribute('data-urgency')) {
+          state.answers.urgency = val;
+        } else if (s.type === 'multi') {
+          if (!state.answers.painPoints) state.answers.painPoints = [];
+          const idx = state.answers.painPoints.indexOf(val);
+          if (idx > -1) state.answers.painPoints.splice(idx, 1);
+          else state.answers.painPoints.push(val);
+        } else {
+          state.answers[s.key] = val;
+        }
+        renderStep();
+      });
+    });
+    const backBtn = document.getElementById('quiz-back');
+    if (backBtn) backBtn.addEventListener('click', function () { state.step--; renderStep(); });
+    const nextBtn = document.getElementById('quiz-next');
+    if (nextBtn) nextBtn.addEventListener('click', function () { advance(s); });
+  }
+
+  function advance(s) {
+    if (s.type === 'text') {
+      const val = document.getElementById('quiz-text-input').value.trim();
+      state.answers[s.key] = val;
+    }
+    if (s.type === 'contact') {
+      const name = document.getElementById('quiz-name').value.trim();
+      const email = document.getElementById('quiz-email').value.trim();
+      if (!name || !email || !email.includes('@')) {
+        alert('Please add your name and a valid email so we can send your result.');
+        return;
+      }
+      state.answers.name = name;
+      state.answers.email = email;
+      submitQuiz();
+      return;
+    }
+    if (s.type === 'single' && !state.answers[s.key]) {
+      alert('Pick an option to continue.');
+      return;
+    }
+    if (s.type === 'multi' && (!state.answers.painPoints || !state.answers.painPoints.length)) {
+      alert('Pick at least one to continue.');
+      return;
+    }
+    state.step++;
+    renderStep();
+  }
+
+  function submitQuiz() {
+    const payload = Object.assign({ submittedAt: new Date().toISOString() }, state.answers);
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function (err) {
+      console.log('Quiz webhook not reachable yet (expected until n8n workflow is built):', err);
+    });
+    console.log('Quiz submission:', payload);
+    state.step++;
+    renderStep();
+  }
+
+  function renderResult() {
+    const body = document.getElementById('quiz-body');
+    const bar = document.getElementById('quiz-progress-bar');
+    bar.style.width = '100%';
+    body.innerHTML = `
+      <div class="quiz-eyebrow">Your Result</div>
+      <h3 class="quiz-q">Here's the honest read.</h3>
+      <p class="quiz-result-text">Based on what you shared, this is exactly the kind of manual work AI agents are built to take off your plate &mdash; and it's very doable for a business your size. Most owners are surprised how quickly something like this pays for itself once it's running quietly in the background.</p>
+      <div class="quiz-nav" style="justify-content:center;">
+        <a class="quiz-btn-primary" href="mailto:hello@aiagentshq.xyz?subject=Free%2015-Minute%20Fit%20Call" style="text-decoration:none; display:inline-block;">Book a Free 15-Minute Fit Call</a>
+      </div>`;
+  }
+
+  window.openQuiz = function () {
+    if (!document.getElementById('quiz-overlay')) buildModal();
+    document.getElementById('quiz-overlay').classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeQuiz = function () {
+    const overlay = document.getElementById('quiz-overlay');
+    if (overlay) overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
 })();
 </script>
 </body>
