@@ -533,7 +533,7 @@
   // IMPORTANT: replace this with your real n8n webhook URL once that workflow is built.
   // Until then, submissions are still captured and shown in the console, and the
   // result screen still works fine for visitors — you just won't receive them yet.
-  const WEBHOOK_URL = "https://amigo.aiagentshq.xyz/webhook/quiz-submit";
+  const WEBHOOK_URL = "https://REPLACE-WITH-YOUR-N8N-WEBHOOK-URL";
 
   const state = { step: 0, answers: { painPoints: [] } };
 
@@ -738,12 +738,14 @@
     const body = document.getElementById('quiz-body');
     const bar = document.getElementById('quiz-progress-bar');
     bar.style.width = '100%';
+    const firstName = (state.answers.name || '').split(' ')[0];
     body.innerHTML = `
-      <div class="quiz-eyebrow">Your Result</div>
-      <h3 class="quiz-q">Here's the honest read.</h3>
-      <p class="quiz-result-text">Based on what you shared, this is exactly the kind of manual work AI agents are built to take off your plate &mdash; and it's very doable for a business your size. Most owners are surprised how quickly something like this pays for itself once it's running quietly in the background.</p>
-      <div class="quiz-nav" style="justify-content:center;">
-        <a class="quiz-btn-primary" href="mailto:hello@aiagentshq.xyz?subject=Free%2015-Minute%20Fit%20Call" style="text-decoration:none; display:inline-block;">Book a Free 15-Minute Fit Call</a>
+      <div class="quiz-eyebrow">You're All Set</div>
+      <h3 class="quiz-q">${firstName ? 'Thanks, ' + firstName + '.' : "Thanks, that's everything."}</h3>
+      <p class="quiz-result-text">We've got your answers &mdash; based on what you shared, this is exactly the kind of manual work AI agents are built to take off your plate, and it's very doable for a business your size. We'll be in touch soon at <strong style="color:var(--ink);">${state.answers.email || 'your email'}</strong> to talk through it.</p>
+      <p class="quiz-result-text" style="margin-top:18px;">Want to reach out sooner instead? <a href="mailto:hello@aiagentshq.xyz?subject=Fit%20Assessment%20Follow-up" style="color:var(--gold);">Email us directly</a>.</p>
+      <div class="quiz-nav" style="justify-content:center; margin-top:24px;">
+        <button class="quiz-btn-primary" onclick="closeQuiz()">Done</button>
       </div>`;
   }
 
