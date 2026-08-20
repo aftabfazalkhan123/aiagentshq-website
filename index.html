@@ -164,27 +164,36 @@
   #quiz-card{
     position:relative;
     width:100%; max-width:560px;
-    max-height:88vh; overflow-y:auto;
+    max-height:85vh;
+    display:flex; flex-direction:column;
     background:var(--bg-raised);
     border:1px solid var(--line);
     border-radius:8px;
-    padding:40px 36px 32px;
+    padding:36px 36px 24px;
   }
   #quiz-close{
     position:absolute; top:16px; right:18px;
     background:none; border:none; color:var(--muted);
     font-size:26px; line-height:1; cursor:pointer;
+    z-index:2;
   }
   #quiz-close:hover{ color:var(--ink); }
-  #quiz-progress{ height:3px; background:var(--line); border-radius:2px; margin-bottom:28px; overflow:hidden; }
+  #quiz-progress{ height:3px; background:var(--line); border-radius:2px; margin-bottom:22px; overflow:hidden; flex-shrink:0; }
   #quiz-progress-bar{ height:100%; background:var(--gold); width:0%; transition:width .3s ease; }
+  #quiz-scroll{ overflow-y:auto; flex:1 1 auto; min-height:0; padding-right:6px; }
+  #quiz-nav-fixed{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-shrink:0; padding-top:18px; margin-top:14px;
+    border-top:1px solid var(--line);
+  }
+  #quiz-nav-fixed:empty{ padding-top:0; margin-top:0; border-top:none; }
   .quiz-eyebrow{
     font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
     color:var(--gold); margin-bottom:10px;
   }
   .quiz-q{ font-family:var(--serif); font-size:24px; font-weight:600; margin-bottom:6px; line-height:1.3; }
   .quiz-sub{ color:var(--muted); font-size:14px; margin-bottom:18px; }
-  .quiz-options{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+  .quiz-options{ display:flex; flex-direction:column; gap:8px; margin-top:16px; }
   .quiz-option{
     text-align:left; background:var(--panel); border:1px solid var(--line);
     color:var(--ink); padding:13px 16px; border-radius:6px; font-family:var(--sans);
@@ -199,7 +208,7 @@
   }
   .quiz-textarea{ min-height:80px; resize:vertical; }
   .quiz-input + .quiz-input{ margin-top:12px; }
-  .quiz-nav{ display:flex; justify-content:space-between; align-items:center; margin-top:28px; }
+  .quiz-nav{ display:flex; justify-content:space-between; align-items:center; }
   .quiz-btn-primary{
     background:var(--gold); color:var(--bg); border:none; padding:12px 22px;
     border-radius:6px; font-family:var(--sans); font-weight:600; font-size:14px; cursor:pointer;
@@ -617,7 +626,8 @@
       <div id="quiz-card">
         <button id="quiz-close" aria-label="Close">&times;</button>
         <div id="quiz-progress"><div id="quiz-progress-bar"></div></div>
-        <div id="quiz-body"></div>
+        <div id="quiz-scroll"><div id="quiz-body"></div></div>
+        <div id="quiz-nav-fixed"></div>
       </div>`;
     document.body.appendChild(overlay);
     overlay.addEventListener('click', function (e) { if (e.target === overlay) closeQuiz(); });
@@ -666,12 +676,13 @@
         </div>`;
     }
 
-    html += `<div class="quiz-nav">
-      ${state.step > 0 ? '<button id="quiz-back" class="quiz-btn-ghost">Back</button>' : '<span></span>'}
-      <button id="quiz-next" class="quiz-btn-primary">${state.step === steps.length - 1 ? 'See My Result' : 'Next'}</button>
-    </div>`;
-
     body.innerHTML = html;
+
+    const navHtml = `
+      ${state.step > 0 ? '<button id="quiz-back" class="quiz-btn-ghost">Back</button>' : '<span></span>'}
+      <button id="quiz-next" class="quiz-btn-primary">${state.step === steps.length - 1 ? 'See My Result' : 'Next'}</button>`;
+    document.getElementById('quiz-nav-fixed').innerHTML = navHtml;
+
     wireStepEvents(s);
   }
 
@@ -752,11 +763,12 @@
     const body = document.getElementById('quiz-body');
     const bar = document.getElementById('quiz-progress-bar');
     bar.style.width = '100%';
+    document.getElementById('quiz-nav-fixed').innerHTML = '';
     const firstName = (state.answers.name || '').split(' ')[0];
     body.innerHTML = `
       <div class="quiz-eyebrow">You're All Set</div>
       <h3 class="quiz-q">${firstName ? 'Thanks, ' + firstName + '.' : "Thanks, that's everything."}</h3>
-      <p class="quiz-result-text">We've got your answers &mdash; based on what you shared, this is exactly the kind of manual work AI agents are built to take off your plate, and it's very doable for a business your size. We'll be in touch soon at <strong style="color:var(--ink);">${state.answers.email || 'your email'}</strong> to talk through it.</p>
+      <p class="quiz-result-text">We've got your answers. Based on what you shared, this is exactly the kind of manual work AI agents are built to take off your plate, and it's very doable for a business your size. We'll be in touch soon at <strong style="color:var(--ink);">${state.answers.email || 'your email'}</strong> to talk through it.</p>
       <p class="quiz-result-text" style="margin-top:18px;">Want to reach out sooner instead? <a href="mailto:hello@aiagentshq.xyz?subject=Fit%20Assessment%20Follow-up" style="color:var(--gold);">Email us directly</a>.</p>
       <div class="quiz-nav" style="justify-content:center; margin-top:24px;">
         <button class="quiz-btn-primary" onclick="closeQuiz()">Done</button>
