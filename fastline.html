@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fastline by AI Agents HQ. Turn Quote Requests Into Sent Quotes in Under 2 Minutes</title>
+<meta name="description" content="Fastline reads a messy quote request, checks your price list, and sends the buyer a clean, itemized quote in under 2 minutes. Built for freight, logistics and wholesale teams.">
+
+<meta property="og:title" content="Fastline by AI Agents HQ">
+<meta property="og:description" content="Turn a messy quote request into a sent quote in under 2 minutes.">
+<meta property="og:image" content="https://aiagentshq.xyz/og-image.png">
+<meta property="og:url" content="https://aiagentshq.xyz/fastline.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #10141c;
+    --bg-raised: #151b26;
+    --panel: rgba(255,255,255,0.04);
+    --line: rgba(255,255,255,0.10);
+    --gold: #c9a227;
+    --gold-soft: rgba(201,162,39,0.35);
+    --ink: #f4f2ea;
+    --muted: #8b93a3;
+    --serif: 'Fraunces', serif;
+    --sans: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+
+  header{
+    position:relative; z-index:2;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 32px;
+    max-width:1120px; margin:0 auto;
+  }
+  header img{height:38px; display:block;}
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none;}
+  .brand-name{font-family:var(--serif); font-weight:600; font-size:19px; letter-spacing:-0.01em;}
+  .brand-name .hq{color:var(--gold);}
+  nav a{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.04em;
+    color:var(--muted); text-decoration:none; margin-left:32px;
+    transition:color 0.2s;
+  }
+  nav a:hover{color:var(--ink);}
+
+  /* HERO */
+  .hero{
+    position:relative; z-index:1;
+    padding:100px 32px 90px;
+    text-align:left;
+    overflow:hidden;
+    max-width:1120px; margin:0 auto;
+  }
+  .hero-ring{
+    position:absolute; top:-140px; right:-160px;
+    width:520px; height:520px;
+    border:1px solid var(--gold-soft);
+    border-radius:50%;
+    z-index:0;
+  }
+  .hero-ring::after{
+    content:"";
+    position:absolute; inset:36px;
+    border:1px solid rgba(201,162,39,0.18);
+    border-radius:50%;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.12em;
+    color:var(--gold); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero h1{
+    position:relative; z-index:1;
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(34px,5.4vw,56px); line-height:1.08; letter-spacing:-0.01em;
+    max-width:760px;
+  }
+  .hero h1 em{font-style:italic; color:var(--gold); font-weight:600;}
+  .hero p.sub{
+    position:relative; z-index:1;
+    margin-top:26px; max-width:580px;
+    font-size:18px; color:var(--muted); line-height:1.7;
+  }
+  .cta-row{position:relative; z-index:1; margin-top:42px; display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.04em;
+    padding:15px 26px; text-decoration:none; display:inline-block;
+    border-radius:2px; transition:all 0.2s; cursor:pointer; border:none;
+  }
+  .btn-primary{background:var(--gold); color:#10141c; font-weight:600;}
+  .btn-primary:hover{background:#ddb838;}
+  .btn-ghost{background:none; border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--gold-soft); color:var(--gold);}
+
+  /* SECTION SCAFFOLDING */
+  section{position:relative; z-index:1; padding:90px 32px;}
+  .section-head{margin-bottom:56px; max-width:640px;}
+  .section-head.center{max-width:640px; margin-left:auto; margin-right:auto; text-align:center;}
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head.center .eyebrow{justify-content:center;}
+  .section-head h2{
+    font-family:var(--serif); font-weight:600; font-size:clamp(28px,3.4vw,38px);
+    letter-spacing:-0.01em;
+  }
+  .section-head p{color:var(--muted); margin-top:14px; font-size:16px;}
+
+  /* STAT CARDS */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .card{background:var(--bg); padding:36px 30px;}
+  .card .stat{font-family:var(--serif); font-weight:600; font-size:clamp(30px,3.6vw,40px); color:var(--gold);}
+  .card.dark{background:var(--bg-raised);}
+  .card.dark .stat{color:var(--ink);}
+  .card p{color:var(--muted); font-size:15px; margin-top:10px;}
+
+  /* STEPS */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:40px;}
+  .step .ring{
+    width:52px; height:52px; border:1px solid var(--gold-soft); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--serif); font-weight:600; color:var(--gold); font-size:19px;
+    margin-bottom:22px;
+  }
+  .step h3{font-family:var(--serif); font-size:18px; font-weight:600; margin-bottom:10px;}
+  .step p{color:var(--muted); font-size:14.5px;}
+
+  /* DEMO */
+  .demo-frame{
+    max-width:880px; margin:0 auto;
+    background:var(--bg-raised); border:1px solid var(--line); border-radius:8px;
+    padding:10px;
+  }
+  .demo-frame video{
+    display:block; width:100%; height:auto;
+    border-radius:4px; background:#000;
+    aspect-ratio:16/9;
+  }
+  .demo-caption{
+    text-align:center; margin-top:18px;
+    color:var(--muted); font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em;
+  }
+
+  /* PRICING */
+  .pricing-card{
+    background:var(--bg-raised); border:1px solid var(--line); border-radius:8px;
+    max-width:480px; margin:0 auto; padding:44px 40px;
+  }
+  .pricing-card .name{font-family:var(--serif); font-weight:600; font-size:20px; margin-bottom:8px;}
+  .pricing-card .price-row{display:flex; align-items:baseline; gap:10px; margin-bottom:24px; flex-wrap:wrap;}
+  .pricing-card .price{font-family:var(--serif); font-weight:600; font-size:42px; color:var(--gold);}
+  .pricing-card .price-sub{color:var(--muted); font-size:13.5px;}
+  .pricing-list{display:flex; flex-direction:column; gap:12px; margin-bottom:28px;}
+  .pricing-list span{
+    font-family:var(--mono); font-size:13px; color:var(--ink);
+    padding-left:18px; position:relative; display:block; line-height:1.5;
+  }
+  .pricing-list span::before{
+    content:""; position:absolute; left:0; top:6px; width:6px; height:6px;
+    background:var(--gold); border-radius:50%;
+  }
+  .pricing-note{font-size:13.5px; color:var(--muted); border-top:1px solid var(--line); padding-top:18px; margin-bottom:18px;}
+  .pricing-compare{
+    font-size:13.5px; color:var(--ink); margin-bottom:26px;
+    padding:14px 16px; border-left:2px solid var(--gold); background:var(--panel);
+  }
+  .pricing-compare strong{color:var(--gold); font-weight:600;}
+
+  /* FAQ */
+  .faq-list{display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); max-width:760px; margin:0 auto;}
+  .faq-item{background:var(--bg); padding:28px 32px;}
+  .faq-item h3{font-family:var(--serif); font-size:17px; font-weight:600; margin-bottom:10px;}
+  .faq-item p{color:var(--muted); font-size:15px; line-height:1.65;}
+
+  /* FINAL CTA / FOOTER */
+  .cta-final{
+    text-align:center; padding:120px 32px;
+    border-top:1px solid var(--line);
+  }
+  .cta-final h2{
+    font-family:var(--serif); font-weight:600; font-size:clamp(30px,4.4vw,46px);
+    max-width:640px; margin:0 auto 30px;
+    letter-spacing:-0.01em;
+  }
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px; text-align:center;
+  }
+  footer p{font-family:var(--mono); font-size:11.5px; letter-spacing:0.08em; color:var(--muted); text-transform:uppercase;}
+
+  /* scroll-triggered reveal */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  @media (max-width:980px){
+    .grid-3{grid-template-columns:1fr;}
+    .steps{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:760px){
+    header{flex-direction:column; gap:18px; align-items:flex-start; padding:24px 16px;}
+    nav{display:flex; flex-wrap:wrap; gap:4px 0;}
+    nav a{margin-left:0; margin-right:20px;}
+    .wrap{padding:0 16px;}
+    .hero{padding:60px 16px 50px;}
+    .hero-ring{display:none;}
+    section{padding:64px 16px;}
+    .steps{grid-template-columns:1fr;}
+    .pricing-card{padding:32px 22px;}
+    .faq-item{padding:24px 20px;}
+    .cta-final{padding:80px 16px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="index.html">
+    <img src="logo.png" alt="AI Agents HQ">
+    <div class="brand-name">AI AGENTS <span class="hq">HQ</span></div>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#demo">Demo</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-ring"></div>
+  <div class="eyebrow">Automated Quoting for Freight, Logistics &amp; Wholesale</div>
+  <h1>Turn a messy quote request into a <em>sent quote</em> in under 2 minutes</h1>
+  <p class="sub">Most freight, logistics and wholesale teams take 24 to 47 hours to answer a quote request. Fastline reads the email, checks your price list, does the math, and sends the buyer a clean, itemized quote. Nobody on your team has to touch it.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://calendly.com/aftab-fazal-khan/15-min-call" target="_blank" rel="noopener">Book a 15-Min Call →</a>
+    <a class="btn btn-ghost" href="#demo">Watch the 90-Second Demo</a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <!-- Results slot: once the first Fastline client is live, swap one of these cards
+         for a real result, e.g. "Quotes sent in X min on average for [client type]". -->
+    <div class="grid-3 reveal">
+      <div class="card">
+        <span class="stat">24-47 hrs</span>
+        <p>average industry quote response time</p>
+      </div>
+      <div class="card">
+        <span class="stat">78%</span>
+        <p>of B2B buyers go with whoever replies first</p>
+      </div>
+      <div class="card dark">
+        <span class="stat">&lt; 2 min</span>
+        <p>quote turnaround with Fastline</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow">How It Works</div>
+      <h2>Four steps, no manual work on your end</h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="ring">1</div>
+        <h3>Request comes in</h3>
+        <p>A buyer emails a messy request: products, quantities, delivery location and deadline, all mixed together.</p>
+      </div>
+      <div class="step">
+        <div class="ring">2</div>
+        <h3>AI reads and extracts</h3>
+        <p>Fastline pulls out each product and quantity, plus where and when the buyer needs it.</p>
+      </div>
+      <div class="step">
+        <div class="ring">3</div>
+        <h3>Prices pulled and totaled</h3>
+        <p>It looks up each item in your price list and works out line totals and the order total.</p>
+      </div>
+      <div class="step">
+        <div class="ring">4</div>
+        <h3>Quote goes out</h3>
+        <p>A clean, itemized quote is emailed back to the buyer, usually within a couple of minutes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow">See It Work</div>
+      <h2>Ninety seconds, start to finish</h2>
+      <p>A real order email goes in. A finished quote comes back. Nothing is staged.</p>
+    </div>
+    <div class="demo-frame reveal">
+      <video src="fastline-demo.mp4" controls preload="metadata" playsinline>
+        Your browser can't play this video. <a href="fastline-demo.mp4">Download it here.</a>
+      </video>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Pricing</div>
+      <h2>Simple, fixed pricing</h2>
+      <p>One scope, one price, no surprises.</p>
+    </div>
+    <div class="pricing-card reveal">
+      <div class="name">Fastline Setup</div>
+      <div class="price-row">
+        <div class="price">$997</div>
+        <div class="price-sub">one-time build and deployment</div>
+      </div>
+      <div class="pricing-list">
+        <span>Workflow built around your products and price list</span>
+        <span>Connected to your Gmail or Outlook inbox</span>
+        <span>Itemized quote email with your company details</span>
+        <span>Optional approval step so you sign off before anything sends</span>
+        <span>Full walkthrough and handoff</span>
+      </div>
+      <div class="pricing-note">Optional: $300 per month for hosting, monitoring, and small tweaks as your prices or products change.</div>
+      <div class="pricing-compare">Compare: an ops hire to handle quotes runs <strong>$3,500+ a month</strong>. A typical agency build starts around <strong>$10k</strong>.</div>
+      <a class="btn btn-primary" href="https://calendly.com/aftab-fazal-khan/15-min-call" target="_blank" rel="noopener" style="display:block; text-align:center;">Book a 15-Min Call →</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <h3>Does this work with my email and price list?</h3>
+        <p>Yes. Fastline connects to Gmail or Outlook and reads from the price sheet you already keep. Google Sheets works out of the box. If your prices live in a CRM or ERP with an API, it can usually be connected during setup.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I check quotes before they go out?</h3>
+        <p>Yes. By default Fastline replies on its own, but an approval step can be added so a person on your team signs off on every quote before it reaches the buyer.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What if my pricing logic is complicated?</h3>
+        <p>Bulk discounts, tiered pricing, margins and shipping rules can be built into the logic during setup, based on how you actually price today. We scope this on the call before anything is built.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How long does setup take?</h3>
+        <p>Most builds are ready to test within a week, depending on how your pricing and product data is structured.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is my data secure?</h3>
+        <p>Your data stays in your own accounts and systems. Fastline connects to them, it does not copy your pricing or customer data anywhere else.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What happens after setup is done?</h3>
+        <p>You own the workflow. The optional $300 monthly plan covers hosting, monitoring, and adjustments as your pricing or product list changes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-final reveal" id="contact">
+  <div class="eyebrow" style="justify-content:center;">Get Started</div>
+  <h2>Stop losing deals to slow replies</h2>
+  <a class="btn btn-primary" href="https://calendly.com/aftab-fazal-khan/15-min-call" target="_blank" rel="noopener">Book a 15-Min Call →</a>
+  <p style="margin-top:16px;"><a href="mailto:hello@aiagentshq.xyz" style="color:var(--muted); font-size:14px;">or email us directly at hello@aiagentshq.xyz</a></p>
+</div>
+
+<footer>
+  <p>AI AGENTS HQ · FASTLINE · &copy; 2026</p>
+</footer>
+
+<script>
+// Scroll-triggered reveal
+(function () {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  items.forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>
