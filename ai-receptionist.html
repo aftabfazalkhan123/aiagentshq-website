@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Receptionist by AI Agents HQ. Every Call Answered, Every Job Booked</title>
-<meta name="description" content="An AI receptionist that answers your business line 24/7, answers customer questions, and books appointments straight into your calendar. Call Ava now to hear her live: (380) 268-1020.">
+<title>AI Receptionist for Home Service Businesses. Every Call Answered, Every Job Booked</title>
+<meta name="description" content="A done-for-you AI receptionist for HVAC, plumbing, roofing and electrical businesses. Ava answers the calls you miss, takes the job details and books the visit. Call her live: (380) 268-1020.">
+<link rel="canonical" href="https://aiagentshq.xyz/ai-receptionist.html">
 
-<meta property="og:title" content="AI Receptionist by AI Agents HQ">
-<meta property="og:description" content="Every call answered, every job booked. Call Ava live: (380) 268-1020.">
+<meta property="og:title" content="AI Receptionist for Home Service Businesses">
+<meta property="og:description" content="Every call answered, every job booked. Set up for you. Call Ava live: (380) 268-1020.">
 <meta property="og:image" content="https://aiagentshq.xyz/og-image.png">
 <meta property="og:url" content="https://aiagentshq.xyz/ai-receptionist.html">
 <meta property="og:type" content="website">
@@ -17,6 +18,71 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will my customers know it's an AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Ava introduces herself as an AI receptionist. Callers care that someone picks up, answers their question, and gets them booked."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does she replace me or my office staff?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You choose which calls she takes: every call, or only the ones you can't pick up."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a new phone number?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You can forward your existing business line to Ava, all the time or only when you don't pick up. You can also give her a new number if you prefer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if she can't answer something?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "She takes the caller's name, number and question, tells them you'll follow up, and you get the details in your call summary. She never makes up prices or promises."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which calendar does she book into?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Google Calendar out of the box. Other calendars and CRMs can usually be connected during setup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does setup take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most businesses are live within a week. We gather your services, hours, service area and common questions on a short call, then build, test and hand it over."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I go over 300 minutes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Extra minutes are $0.35 each, billed with your monthly plan. A typical call runs two to three minutes, so 300 minutes covers around 100 to 150 calls a month."
+      }
+    }
+  ]
+}
+</script>
 
 <style>
   :root{
@@ -241,13 +307,53 @@
     .faq-item{padding:24px 20px;}
     .cta-final{padding:80px 16px;}
   }
+  /* ADDED: hero points, comparison, founder, partner strip */
+  header img{width:38px;}
+  .hero p.sub{max-width:610px;}
+  .hero .hero-points{
+    position:relative; z-index:1;
+    margin-top:22px; display:flex; flex-wrap:wrap; gap:10px 22px;
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em; color:var(--ink);
+  }
+  .hero .hero-points span::before{content:"\2713"; color:var(--gold); margin-right:8px;}
+  .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); max-width:920px; margin:0 auto;}
+  .card .tag{
+    display:inline-block; font-family:var(--mono); font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:14px;
+  }
+  .card.dark .tag{color:var(--gold);}
+  .check-list{list-style:none; display:flex; flex-direction:column; gap:12px; margin-top:6px;}
+  .check-list li{position:relative; padding-left:22px; color:var(--muted); font-size:15px; line-height:1.55;}
+  .check-list li::before{content:""; position:absolute; left:0; top:9px; width:6px; height:6px; border-radius:50%; background:var(--muted);}
+  .card.dark .check-list li{color:var(--ink);}
+  .card.dark .check-list li::before{background:var(--gold);}
+  .founder{
+    max-width:760px; margin:0 auto;
+    border-left:2px solid var(--gold); background:var(--panel);
+    padding:34px 36px;
+  }
+  .founder h3{font-family:var(--serif); font-size:22px; font-weight:600; margin-bottom:12px;}
+  .founder p{color:var(--muted); font-size:15.5px; line-height:1.7;}
+  .founder p + p{margin-top:12px;}
+  .founder .sig{margin-top:18px; font-family:var(--mono); font-size:12.5px; letter-spacing:0.06em; color:var(--ink);}
+  .partner-strip{
+    max-width:880px; margin:0 auto; text-align:center;
+    border:1px solid var(--line); border-radius:8px; padding:30px 28px;
+  }
+  .partner-strip p{color:var(--muted); font-size:15.5px;}
+  .partner-strip a{color:var(--gold); text-decoration:none; font-weight:600;}
+  .partner-strip a:hover{text-decoration:underline;}
+  footer a{text-decoration:none;}
+  footer a:hover{color:var(--ink);}
+  @media (max-width:980px){ .grid-2{grid-template-columns:1fr;} }
+  @media (max-width:760px){ .founder{padding:26px 22px;} }
 </style>
 </head>
 <body>
 
 <header>
   <a class="brand" href="index.html">
-    <img src="logo.png" alt="AI Agents HQ">
+    <img src="logo-small.png" alt="AI Agents HQ" width="38" height="38">
     <div class="brand-name">AI AGENTS <span class="hq">HQ</span></div>
   </a>
   <nav>
@@ -256,14 +362,20 @@
     <a href="#how-it-works">How it works</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
+    <a href="partners.html">Partners</a>
   </nav>
 </header>
 
 <section class="hero">
   <div class="hero-ring"></div>
-  <div class="eyebrow">AI Receptionist for Home Services, Trucking &amp; Logistics</div>
+  <div class="eyebrow">AI Receptionist for Home Service Businesses</div>
   <h1>Every call answered. Every job <em>booked</em>.</h1>
-  <p class="sub">You can't pick up the phone from a roof, under a sink, or behind the wheel. Ava can. She answers your business line 24/7, handles customer questions, and books appointments straight into your calendar while you keep working.</p>
+  <p class="sub">You can't pick up the phone from a roof or under a sink. Ava can. She answers the calls you miss, takes the job details, and books the visit straight into your calendar. We build and set up the whole thing for you.</p>
+  <div class="hero-points">
+    <span>Set up for you</span>
+    <span>Answers 24/7</span>
+    <span>Keeps your number</span>
+  </div>
   <div class="cta-row">
     <a class="btn btn-primary" href="tel:+13802681020">Call Ava Now: (380) 268-1020</a>
     <a class="btn btn-ghost" href="https://calendly.com/aftab-fazal-khan/15-min-call" target="_blank" rel="noopener">Book a 15-Min Call</a>
@@ -275,12 +387,12 @@
     <div class="call-box reveal">
       <div class="label">Don't take our word for it. Call her.</div>
       <a class="number" href="tel:+13802681020">(380) 268-1020</a>
-      <p>Ava is live right now and answers for AI Agents HQ. Call like a customer would and put her to the test. Calls are kept short, and she'll tell you she's an AI.</p>
+      <p>Ava is live right now. Call in like one of your own customers and she'll answer as your receptionist. Calls are kept short, and she'll tell you she's an AI.</p>
       <div class="try-list">
-        <span>Ask what we do</span>
-        <span>Ask about pricing</span>
+        <span>Say your AC just died</span>
+        <span>Report a leak</span>
         <span>Ask if she's human</span>
-        <span>Book a call with us</span>
+        <span>Ask about pricing</span>
       </div>
     </div>
   </div>
@@ -291,8 +403,8 @@
     <div class="grid-3 reveal">
       <div class="card">
         <span class="stat">38%</span>
-        <p>of calls to small businesses are answered by a live person. The rest go to voicemail or ring out.</p>
-        <span class="src">411 Locals study, 2024</span>
+        <p>of calls to small businesses were answered by a live person in one call-tracking study. The rest went to voicemail or rang out.</p>
+        <span class="src">411 Locals study of 85 small businesses</span>
       </div>
       <div class="card">
         <span class="stat">24/7</span>
@@ -310,13 +422,13 @@
   <div class="wrap">
     <div class="section-head center reveal">
       <div class="eyebrow">How It Works</div>
-      <h2>Your receptionist, without the payroll</h2>
+      <h2>Backup for every call you can't take</h2>
     </div>
     <div class="steps reveal">
       <div class="step">
         <div class="ring">1</div>
         <h3>She answers</h3>
-        <p>Every call, on the first ring, day or night. Forward your existing business number to her, or give out a new one.</p>
+        <p>Day or night. Forward your business line to her all the time, or only when you don't pick up. Your number stays the same.</p>
       </div>
       <div class="step">
         <div class="ring">2</div>
@@ -337,25 +449,70 @@
   </div>
 </section>
 
+<section id="done-for-you">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Done For You</div>
+      <h2>You run the jobs. We run the receptionist.</h2>
+      <p>There are apps that let you build an AI receptionist yourself. Here is the difference.</p>
+    </div>
+    <div class="grid-2 reveal">
+      <div class="card">
+        <span class="tag">Do-it-yourself apps</span>
+        <ul class="check-list">
+          <li>Lower monthly price</li>
+          <li>You write the script and answers yourself</li>
+          <li>You connect the calendar and test the calls</li>
+          <li>When something sounds wrong, you fix it</li>
+        </ul>
+      </div>
+      <div class="card dark">
+        <span class="tag">AI Agents HQ</span>
+        <ul class="check-list">
+          <li>One short call to learn your business</li>
+          <li>We write, build and test everything before it takes a real call</li>
+          <li>We connect your calendar and call forwarding with you</li>
+          <li>Prices or services change? Tell us and we update her</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="section-head center reveal">
       <div class="eyebrow">Built For</div>
-      <h2>Businesses that live on the phone but can't always answer it</h2>
+      <h2>Trades that live on the phone but can't always answer it</h2>
     </div>
     <div class="grid-3 reveal">
       <div class="card">
-        <h3>Home services</h3>
-        <p>HVAC, plumbing, roofing, electrical. The phone rings while you're on a job, and the customer calls the next company on the list. Ava picks up and books them.</p>
+        <h3>HVAC</h3>
+        <p>The AC dies at 9 PM and the homeowner starts calling down the list. Ava picks up, takes the details, and books the visit.</p>
       </div>
       <div class="card">
-        <h3>Trucking &amp; logistics</h3>
-        <p>Rate and load inquiries after hours, shipment questions, new customer calls. Ava answers, captures the details, and sets up the follow-up.</p>
+        <h3>Plumbing</h3>
+        <p>You're under a sink with both hands busy. Ava answers, finds out what's wrong and where, and gets them on your calendar.</p>
       </div>
       <div class="card">
-        <h3>Any appointment business</h3>
-        <p>If your customers call to ask questions and book a time, Ava can handle the first conversation and fill your calendar.</p>
+        <h3>Roofing &amp; electrical</h3>
+        <p>You're on a roof or in a panel. Ava answers the estimate requests and questions, and you get the summary when you're back on the ground.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Who's Behind This</div>
+      <h2>You deal with one person, not a help desk</h2>
+    </div>
+    <div class="founder reveal">
+      <h3>Aftab Fazal Khan, founder of AI Agents HQ</h3>
+      <p>I spent over 20 years running B2B sales and operations, including in freight logistics and staffing for the US market, before I started building AI systems for small businesses.</p>
+      <p>I build your receptionist myself, test it with real calls, and make the changes when your business changes. If something isn't right, you tell me and I fix it.</p>
+      <div class="sig">hello@aiagentshq.xyz</div>
     </div>
   </div>
 </section>
@@ -403,6 +560,10 @@
         <p>Yes. Ava introduces herself as an AI receptionist. Callers care that someone picks up, answers their question, and gets them booked. That's what she does.</p>
       </div>
       <div class="faq-item">
+        <h3>Does she replace me or my office staff?</h3>
+        <p>No. You choose which calls she takes: every call, or only the ones you can't pick up. When you answer, she stays out of the way.</p>
+      </div>
+      <div class="faq-item">
         <h3>Do I need a new phone number?</h3>
         <p>No. You can forward your existing business line to Ava, all the time or only when you don't pick up. You can also give her a new number if you prefer.</p>
       </div>
@@ -426,6 +587,14 @@
   </div>
 </section>
 
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="partner-strip reveal">
+      <p>Run a marketing agency with contractor clients? <a href="partners.html">See the partner program &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
 <div class="cta-final reveal" id="contact">
   <div class="eyebrow" style="justify-content:center;">Hear It For Yourself</div>
   <h2>Stop sending customers to voicemail</h2>
@@ -437,7 +606,7 @@
 </div>
 
 <footer>
-  <p>AI AGENTS HQ · AI RECEPTIONIST · &copy; 2026</p>
+  <p>AI AGENTS HQ · AI RECEPTIONIST · <a href="partners.html">PARTNERS</a> · &copy; 2026</p>
   <p class="addr" style="margin-top:8px; text-transform:none; letter-spacing:0.02em; opacity:0.8;">605 W 9th Street, Unit #4066, Austin, TX 78701</p>
 </footer>
 
