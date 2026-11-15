@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | AI Agents HQ</title>
+<meta name="description" content="What information AI Agents HQ collects through its website and demo phone line, and what we do with it.">
+<link rel="canonical" href="https://aiagentshq.xyz/privacy.html">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10141c;
+    --bg-raised: #151b26;
+    --panel: rgba(255,255,255,0.04);
+    --line: rgba(255,255,255,0.10);
+    --gold: #c9a227;
+    --gold-soft: rgba(201,162,39,0.35);
+    --ink: #f4f2ea;
+    --muted: #8b93a3;
+    --serif: 'Fraunces', serif;
+    --sans: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+
+  header{
+    position:relative; z-index:2;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 32px;
+    max-width:1120px; margin:0 auto;
+  }
+  header img{height:38px; display:block;}
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none;}
+  .brand-name{font-family:var(--serif); font-weight:600; font-size:19px; letter-spacing:-0.01em;}
+  .brand-name .hq{color:var(--gold);}
+  nav a{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.04em;
+    color:var(--muted); text-decoration:none; margin-left:32px;
+    transition:color 0.2s;
+  }
+  nav a:hover{color:var(--ink);}
+
+  /* HERO */
+  .hero{
+    position:relative; z-index:1;
+    padding:100px 32px 90px;
+    overflow:hidden;
+    max-width:1120px; margin:0 auto;
+  }
+  .hero-ring{
+    position:absolute; top:-140px; right:-160px;
+    width:520px; height:520px;
+    border:1px solid var(--gold-soft);
+    border-radius:50%;
+    z-index:0;
+  }
+  .hero-ring::after{
+    content:"";
+    position:absolute; inset:36px;
+    border:1px solid rgba(201,162,39,0.18);
+    border-radius:50%;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.12em;
+    color:var(--gold); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero h1{
+    position:relative; z-index:1;
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(34px,5.4vw,58px); line-height:1.08; letter-spacing:-0.01em;
+    max-width:760px;
+  }
+  .hero h1 em{font-style:italic; color:var(--gold); font-weight:600;}
+  .hero p.sub{
+    position:relative; z-index:1;
+    margin-top:26px; max-width:590px;
+    font-size:18px; color:var(--muted); line-height:1.7;
+  }
+  .cta-row{position:relative; z-index:1; margin-top:42px; display:flex; gap:16px; flex-wrap:wrap; align-items:center;}
+  .btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.04em;
+    padding:15px 26px; text-decoration:none; display:inline-block;
+    border-radius:2px; transition:all 0.2s; cursor:pointer; border:none;
+  }
+  .btn-primary{background:var(--gold); color:#10141c; font-weight:600;}
+  .btn-primary:hover{background:#ddb838;}
+  .btn-ghost{background:none; border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--gold-soft); color:var(--gold);}
+
+  /* CALL BOX */
+  .call-box{
+    max-width:880px; margin:0 auto;
+    background:var(--bg-raised); border:1px solid var(--line); border-radius:8px;
+    padding:48px 40px; text-align:center;
+  }
+  .call-box .label{font-family:var(--mono); font-size:13px; letter-spacing:0.12em; color:var(--gold); text-transform:uppercase;}
+  .call-box .number{
+    display:inline-block; margin:18px 0 14px;
+    font-family:var(--serif); font-weight:600; font-size:clamp(34px,6vw,56px);
+    color:var(--ink); text-decoration:none; letter-spacing:0.01em;
+  }
+  .call-box .number:hover{color:var(--gold);}
+  .call-box p{color:var(--muted); max-width:560px; margin:0 auto; font-size:15.5px;}
+  .try-list{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:24px;}
+  .try-list span{
+    font-family:var(--mono); font-size:12.5px; color:var(--ink);
+    border:1px solid var(--line); border-radius:999px; padding:7px 14px;
+  }
+
+  /* SECTION SCAFFOLDING */
+  section{position:relative; z-index:1; padding:90px 32px;}
+  .section-head{margin-bottom:56px; max-width:640px;}
+  .section-head.center{max-width:640px; margin-left:auto; margin-right:auto; text-align:center;}
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head.center .eyebrow{justify-content:center;}
+  .section-head h2{
+    font-family:var(--serif); font-weight:600; font-size:clamp(28px,3.4vw,38px);
+    letter-spacing:-0.01em;
+  }
+  .section-head p{color:var(--muted); margin-top:14px; font-size:16px;}
+
+  /* STAT CARDS */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .card{background:var(--bg); padding:36px 30px;}
+  .card .stat{font-family:var(--serif); font-weight:600; font-size:clamp(30px,3.6vw,40px); color:var(--gold);}
+  .card.dark{background:var(--bg-raised);}
+  .card.dark .stat{color:var(--ink);}
+  .card p{color:var(--muted); font-size:15px; margin-top:10px;}
+  .card .src{display:block; margin-top:10px; font-family:var(--mono); font-size:11px; color:var(--muted); opacity:0.75;}
+  .card h3{font-family:var(--serif); font-size:20px; font-weight:600; margin-bottom:10px;}
+
+  /* STEPS */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:40px;}
+  .step .ring{
+    width:52px; height:52px; border:1px solid var(--gold-soft); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--serif); font-weight:600; color:var(--gold); font-size:19px;
+    margin-bottom:22px;
+  }
+  .step h3{font-family:var(--serif); font-size:18px; font-weight:600; margin-bottom:10px;}
+  .step p{color:var(--muted); font-size:14.5px;}
+
+  /* PRICING */
+  .pricing-card{
+    background:var(--bg-raised); border:1px solid var(--line); border-radius:8px;
+    max-width:500px; margin:0 auto; padding:44px 40px;
+  }
+  .badge{
+    display:inline-block; font-family:var(--mono); font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:#10141c; background:var(--gold); padding:5px 10px; border-radius:2px; margin-bottom:18px;
+  }
+  .pricing-card .name{font-family:var(--serif); font-weight:600; font-size:20px; margin-bottom:8px;}
+  .pricing-card .price-row{display:flex; align-items:baseline; gap:10px; margin-bottom:6px; flex-wrap:wrap;}
+  .pricing-card .price{font-family:var(--serif); font-weight:600; font-size:42px; color:var(--gold);}
+  .pricing-card .price-sub{color:var(--muted); font-size:13.5px;}
+  .pricing-card .setup{color:var(--ink); font-size:14.5px; margin-bottom:24px;}
+  .pricing-list{display:flex; flex-direction:column; gap:12px; margin-bottom:28px;}
+  .pricing-list span{
+    font-family:var(--mono); font-size:13px; color:var(--ink);
+    padding-left:18px; position:relative; display:block; line-height:1.5;
+  }
+  .pricing-list span::before{
+    content:""; position:absolute; left:0; top:6px; width:6px; height:6px;
+    background:var(--gold); border-radius:50%;
+  }
+  .pricing-note{font-size:13.5px; color:var(--muted); border-top:1px solid var(--line); padding-top:18px; margin-bottom:18px;}
+  .pricing-compare{
+    font-size:13.5px; color:var(--ink); margin-bottom:26px;
+    padding:14px 16px; border-left:2px solid var(--gold); background:var(--panel);
+  }
+  .pricing-compare strong{color:var(--gold); font-weight:600;}
+
+  /* FAQ */
+  .faq-list{display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); max-width:760px; margin:0 auto;}
+  .faq-item{background:var(--bg); padding:28px 32px;}
+  .faq-item h3{font-family:var(--serif); font-size:17px; font-weight:600; margin-bottom:10px;}
+  .faq-item p{color:var(--muted); font-size:15px; line-height:1.65;}
+
+  /* FINAL CTA / FOOTER */
+  .cta-final{
+    text-align:center; padding:120px 32px;
+    border-top:1px solid var(--line);
+  }
+  .cta-final h2{
+    font-family:var(--serif); font-weight:600; font-size:clamp(30px,4.4vw,46px);
+    max-width:640px; margin:0 auto 30px;
+    letter-spacing:-0.01em;
+  }
+  .cta-final .cta-row{justify-content:center;}
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px; text-align:center;
+  }
+  footer p{font-family:var(--mono); font-size:11.5px; letter-spacing:0.08em; color:var(--muted); text-transform:uppercase;}
+
+  /* scroll-triggered reveal */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  @media (max-width:980px){
+    .grid-3{grid-template-columns:1fr;}
+    .steps{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:760px){
+    header{flex-direction:column; gap:18px; align-items:flex-start; padding:24px 16px;}
+    nav{display:flex; flex-wrap:wrap; gap:4px 0;}
+    nav a{margin-left:0; margin-right:20px;}
+    .wrap{padding:0 16px;}
+    .hero{padding:60px 16px 50px;}
+    .hero-ring{display:none;}
+    section{padding:64px 16px;}
+    .steps{grid-template-columns:1fr;}
+    .call-box{padding:36px 20px;}
+    .pricing-card{padding:32px 22px;}
+    .faq-item{padding:24px 20px;}
+    .cta-final{padding:80px 16px;}
+  }
+  /* ADDED: hero points, comparison, founder, partner strip */
+  header img{width:38px;}
+  .hero p.sub{max-width:610px;}
+  .hero .hero-points{
+    position:relative; z-index:1;
+    margin-top:22px; display:flex; flex-wrap:wrap; gap:10px 22px;
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em; color:var(--ink);
+  }
+  .hero .hero-points span::before{content:"\2713"; color:var(--gold); margin-right:8px;}
+  .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); max-width:920px; margin:0 auto;}
+  .card .tag{
+    display:inline-block; font-family:var(--mono); font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:14px;
+  }
+  .card.dark .tag{color:var(--gold);}
+  .check-list{list-style:none; display:flex; flex-direction:column; gap:12px; margin-top:6px;}
+  .check-list li{position:relative; padding-left:22px; color:var(--muted); font-size:15px; line-height:1.55;}
+  .check-list li::before{content:""; position:absolute; left:0; top:9px; width:6px; height:6px; border-radius:50%; background:var(--muted);}
+  .card.dark .check-list li{color:var(--ink);}
+  .card.dark .check-list li::before{background:var(--gold);}
+  .founder{
+    max-width:760px; margin:0 auto;
+    border-left:2px solid var(--gold); background:var(--panel);
+    padding:34px 36px;
+  }
+  .founder h3{font-family:var(--serif); font-size:22px; font-weight:600; margin-bottom:12px;}
+  .founder p{color:var(--muted); font-size:15.5px; line-height:1.7;}
+  .founder p + p{margin-top:12px;}
+  .founder .sig{margin-top:18px; font-family:var(--mono); font-size:12.5px; letter-spacing:0.06em; color:var(--ink);}
+  .partner-strip{
+    max-width:880px; margin:0 auto; text-align:center;
+    border:1px solid var(--line); border-radius:8px; padding:30px 28px;
+  }
+  .partner-strip p{color:var(--muted); font-size:15.5px;}
+  .partner-strip a{color:var(--gold); text-decoration:none; font-weight:600;}
+  .partner-strip a:hover{text-decoration:underline;}
+  footer a{text-decoration:none;}
+  footer a:hover{color:var(--ink);}
+  @media (max-width:980px){ .grid-2{grid-template-columns:1fr;} }
+  @media (max-width:760px){ .founder{padding:26px 22px;} }
+  /* CONTACT FORM */
+  .form-card{max-width:640px; margin:0 auto; background:var(--bg-raised); border:1px solid var(--line); border-radius:8px; padding:40px 36px;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .form-grid .full{grid-column:1 / -1;}
+  .field label{display:block; font-family:var(--mono); font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;}
+  .field input, .field textarea{
+    width:100%; background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:4px;
+    padding:12px 14px; font-family:var(--sans); font-size:15px;
+  }
+  .field textarea{min-height:110px; resize:vertical;}
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--gold);}
+  .hp-field{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
+  .form-actions{margin-top:22px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;}
+  .form-note{font-size:13px; color:var(--muted);}
+  .form-note a{color:var(--muted);}
+  .form-status{margin-top:16px; font-size:14.5px; color:var(--ink); display:none;}
+  .form-status.show{display:block;}
+  .form-status.error{color:#e08a7a;}
+  @media (max-width:760px){ .form-card{padding:28px 20px;} .form-grid{grid-template-columns:1fr;} }
+</style>
+<style>
+  .legal{max-width:720px; margin:0 auto;}
+  .legal h1{font-family:var(--serif); font-weight:600; font-size:clamp(32px,4.6vw,46px); letter-spacing:-0.01em; margin-bottom:8px;}
+  .legal .updated{font-family:var(--mono); font-size:12px; letter-spacing:0.06em; color:var(--muted); margin-bottom:28px;}
+  .legal h2{font-family:var(--serif); font-weight:600; font-size:22px; margin:36px 0 12px;}
+  .legal p{color:var(--muted); font-size:16px; line-height:1.75; margin-bottom:12px;}
+  .legal ul{margin:0 0 12px 20px; color:var(--muted); font-size:16px; line-height:1.75;}
+  .legal li{margin-bottom:8px;}
+  .legal strong{color:var(--ink); font-weight:600;}
+  .legal a{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="index.html">
+    <img src="logo-small.png" alt="AI Agents HQ" width="38" height="38">
+    <div class="brand-name">AI AGENTS <span class="hq">HQ</span></div>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="ai-receptionist.html">AI Receptionist</a>
+    <a href="partners.html">Partners</a>
+  </nav>
+</header>
+
+<section style="padding-top:60px;">
+  <div class="wrap">
+    <div class="legal">
+      <div class="eyebrow">Privacy</div>
+      <h1>Privacy policy</h1>
+      <p class="updated">Last updated: November 15, 2026</p>
+
+      <p>This page explains, in plain language, what information AI Agents HQ collects through this website and our demo phone line, and what we do with it.</p>
+
+      <h2>Who we are</h2>
+      <p>AI Agents HQ builds AI agents and automations for small businesses. You can reach us at <a href="mailto:hello@aiagentshq.xyz">hello@aiagentshq.xyz</a>.</p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Contact form.</strong> When you send us a note, we receive your name, email, and anything else you choose to add, such as your business name, phone number and message.</li>
+        <li><strong>Demo phone line.</strong> Calls to (380) 268-1020 are answered by an AI receptionist, and she says so. Calls are recorded and transcribed so we can review how the call was handled. If you book a call with us during the conversation, we keep the name, company and email you give.</li>
+        <li><strong>Booked calls.</strong> When you book a call through our scheduling link, we receive the name and email you enter, and a calendar invite is sent to you.</li>
+        <li><strong>Email.</strong> If you email us, we keep the conversation so we can reply.</li>
+      </ul>
+
+      <h2>What we don't do</h2>
+      <ul>
+        <li>We don't sell your information.</li>
+        <li>We don't run advertising or analytics trackers on this website.</li>
+        <li>We don't add you to a mailing list because you called or wrote to us.</li>
+      </ul>
+
+      <h2>How we use it</h2>
+      <p>We use your information to reply to you, to hold the call you booked, and to improve how our AI receptionist handles calls. That's it.</p>
+
+      <h2>Services that help us run things</h2>
+      <p>We rely on a few outside services, and your information passes through them when you use the related feature:</p>
+      <ul>
+        <li>Retell AI and Twilio, for the demo phone line</li>
+        <li>Google, for email, calendar invites and the fonts on this site</li>
+        <li>Calendly, for booking calls</li>
+        <li>Our own server, which receives the contact form and forwards it to our inbox</li>
+      </ul>
+
+      <h2>If you become a client</h2>
+      <p>When we run an AI receptionist for your business, calls from your customers are handled on your behalf. We use that information only to provide the service to you, such as booking the appointment and sending you the call summary.</p>
+
+      <h2>Keeping and deleting</h2>
+      <p>We keep enquiries and call records for as long as they are useful for replying to you or providing a service. If you want us to delete what we hold about you, email <a href="mailto:hello@aiagentshq.xyz">hello@aiagentshq.xyz</a> and we will.</p>
+
+      <h2>Changes</h2>
+      <p>If we change how we handle information, we'll update this page and the date at the top.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>AI AGENTS HQ · <a href="ai-receptionist.html">AI RECEPTIONIST</a> · <a href="partners.html">PARTNERS</a> · PRIVACY · &copy; 2026</p>
+  <p class="addr" style="margin-top:8px; text-transform:none; letter-spacing:0.02em; opacity:0.8;">605 W 9th Street, Unit #4066, Austin, TX 78701</p>
+</footer>
+
+</body>
+</html>
